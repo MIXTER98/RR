@@ -19,6 +19,14 @@ export class UsuarioService {
       apellidosusuario: "Sulca Ramos",
       contrasena: "987654321",
       rol: "user"
+    },
+    {
+      idusuario: 3,
+      nombrelogin: "Mario@gmail.com",
+      nombreusuario: "Mario",
+      apellidosusuario: "Perez Oré",
+      contrasena: "987654321",
+      rol: "user"
     }
   ];
 

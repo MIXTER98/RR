@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {UsuarioService} from '../services/usuario.service';
-import {Usuario} from '../models/usuario.model';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [FormsModule, CommonModule],
@@ -17,7 +17,7 @@ export class ModuloLogin {
   rol: string = '';
   tipoMensaje: 'exito' | 'error'|''='';
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(private usuarioService: UsuarioService, private router: Router) {}
   login(): void {
     if(!this.nombreLogin || !this.constrasena){
       this.mensaje = 'Por favor, complete todos los campos!';
@@ -32,7 +32,10 @@ export class ModuloLogin {
 
     if(autencado){
     this.mensaje ='Login corecto, !Bienvenido';
-    this.tipoMensaje ='exito';} else{
+    this.tipoMensaje ='exito';
+    //Redirige a otra ruta
+      this.router.navigate(['/dashboard']);
+    } else{
     this.mensaje ='Usuario o contraseña incorrecto';
     this.tipoMensaje ='error';
     }

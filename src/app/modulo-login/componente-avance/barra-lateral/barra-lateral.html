@@ -1,0 +1,16 @@
+<div>
+  <fieldset class="border-2 border-dashed m-4 rounded-[10px] p-2 flex flex-col items-center space-y-4 text-lg" 
+            style="border-color: #004080; color: #000000;">
+    <legend class="font-bold text-xl m-2" style="color: #004080;">AVANCES</legend>
+    
+    <a *ngFor="let accion of Avances" 
+       class="cursor-pointer w-full text-center font-bold rounded-2xl"
+       (click)="seleccionar(accion)"
+       [ngClass]="{'bg-blue-600': accion === seleccionado}"
+       [style.background-color]="accion === seleccionado ? '#004080' : 'transparent'"
+       [style.color]="accion === seleccionado ? '#ffffff' : '#000000'">
+      {{ accion }}
+    </a>
+  </fieldset>
+</div>
+
