@@ -14,10 +14,13 @@
          [&::-webkit-progress-value]:bg-[#26d408] 
          [&::-moz-progress-bar]:bg-[#06c636]">
         </progress>
-        <div class="space-x-2 space-y-1 flex items-center justify-between" >
-          <button class="bg-green-500 p-2 font-bold text-white rounded-[10px] cursor-pointer" (click)="modalImagenAdd.showModal()">AGREGAR</button>
-          <button class="bg-red-500 p-2 font-bold text-white rounded-[10px] cursor-pointer" (click)="modalImagenDel.showModal()">ELIMINAR</button>
-          <button class="bg-yellow-500 p-2 font-bold text-white rounded-[10px] cursor-pointer" (click)="modalImagenUp.showModal()">EDITAR</button>
+        <div class="space-x-2 space-y-1 flex items-center justify-between">
+          <button class="bg-green-500 p-2 font-bold text-white rounded-[10px] cursor-pointer"
+            (click)="modalImagenAdd.showModal()">AGREGAR</button>
+          <button class="bg-red-500 p-2 font-bold text-white rounded-[10px] cursor-pointer"
+            (click)="modalImagenDel.showModal()">ELIMINAR</button>
+          <button class="bg-yellow-500 p-2 font-bold text-white rounded-[10px] cursor-pointer"
+            (click)="modalImagenUp.showModal()">EDITAR</button>
         </div>
       </div>
     </div>
@@ -30,22 +33,22 @@
         <img [src]="b.rutaImagen" class="h-50 w-80">
       </div>
     </div>
+    <!-- modal.component.html -->
+    <dialog #modalImagenAdd class="rounded-lg p-6 bg-white shadow-lg">
+      <h2 class="text-xl font-bold mb-4">Título del modal</h2>
+      <p>Agregar Imagen.</p>
+      <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" (click)="modalImagenAdd.close()">Cerrar</button>
+    </dialog>
+    <dialog #modalImagenDel class="rounded-lg p-6 bg-white shadow-lg">
+      <h2 class="text-xl font-bold mb-4">Título del modal</h2>
+      <p>Eliminar Imagen. {{a.idusuario.idUsuario}}</p>
+      <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" (click)="modalImagenDel.close()">Cerrar</button>
+      <button class="mt-4 bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
+    </dialog>
+    <dialog #modalImagenUp class="rounded-lg p-6 bg-white shadow-lg">
+      <h2 class="text-xl font-bold mb-4">Título del modal</h2>
+      <p>Editar Imagen.</p>
+      <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" (click)="modalImagenUp.close()">Cerrar</button>
+    </dialog>
   </div>
 </div>
-
-  <!-- modal.component.html -->
-  <dialog #modalImagenAdd class="rounded-lg p-6 bg-white shadow-lg">
-    <h2 class="text-xl font-bold mb-4">Título del modal</h2>
-    <p>Agregar Imagen.</p>
-    <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" (click)="modalImagenAdd.close()">Cerrar</button>
-  </dialog>
-  <dialog #modalImagenDel class="rounded-lg p-6 bg-white shadow-lg">
-    <h2 class="text-xl font-bold mb-4">Título del modal</h2>
-    <p>Eliminar Imagen.</p>
-    <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" (click)="modalImagenDel.close()">Cerrar</button>
-  </dialog>
-  <dialog #modalImagenUp class="rounded-lg p-6 bg-white shadow-lg">
-    <h2 class="text-xl font-bold mb-4">Título del modal</h2>
-    <p>Editar Imagen.</p>
-    <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" (click)="modalImagenUp.close()">Cerrar</button>
-  </dialog>

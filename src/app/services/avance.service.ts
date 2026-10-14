@@ -1,10 +1,11 @@
-import {Injectable} from '@angular/core';
-import {AvanceModel} from '../models/avance.model';
-import {Usuario} from '../models/usuario.model';
-import { ImagenPorUsuario} from '../models/areglos-objetos';
-import {UsuarioService} from './usuario.service';
+import { Injectable } from '@angular/core';
+import { AvanceModel } from '../models/avance.model';
+import { Usuario } from '../models/usuario.model';
+import { ImagenPorUsuario } from '../models/areglos-objetos';
+import { UsuarioService } from './usuario.service';
+import { I } from '@angular/cdk/keycodes';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AvanceService {
   usuarios: Usuario[] = [];
 
@@ -54,7 +55,7 @@ export class AvanceService {
       const totalporcentaje = avanceUsuario.reduce((a, b) => a + (b.porcentaje || 0), 0);
       if (avanceUsuario.length > 0) {
         resultado.push({
-          idusuario: {idUsuario: u.idusuario},
+          idusuario: { idUsuario: u.idusuario },
           usuarios: u,
           avances: avanceUsuario,
           totalporcentaje
@@ -65,11 +66,16 @@ export class AvanceService {
     return resultado;
   }
 
-  idUsuario: string = "";
-  rutaImagen: string = "";
-  agregarImageService(){
+  /*{
+      id: 1,
+      rutaImagen: "img-carrusel/cons1.jpg",
+      idUsuario: 1,
+      fecha: "15/12/2026",
+      porcentaje: 50,
+      descripcion: "Por culminar la primera parte"
+    },*/
 
-  }
+
 
 }
 
