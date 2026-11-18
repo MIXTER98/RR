@@ -1,5 +1,6 @@
 export interface Imagen {
-  idImagenes: number;
+  idImagenes?: number;
+  idUsuario: number;
   rutaImagen: string;
   descripcionAvance: string;
   fechaSubido: Date;

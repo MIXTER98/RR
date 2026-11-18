@@ -32,4 +32,9 @@ export class UserService {
       contrasenaLogin
     });
   }
+
+
+  AgregarImagen(id: number, imagen: Imagen ){
+    return this.http.post<Imagen>(`${this.apiUrl}/${id}/imagenes`, imagen)
+  }
 }

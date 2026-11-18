@@ -3,10 +3,10 @@
 
     <!-- Sección izquierda: info del usuario -->
     <div class="w-3/6 h-50 flex items-center space-x-4 p-2" style="background-color: #004080;">
-      <div class="h-10 w-10 rounded-full bg-white shadow shadow-amber-100"></div>
+      <div class="flex justify-center items-center h-25 w-25 rounded-full bg-white shadow shadow-amber-100"><h1 class="font-bold text-2xl text-gray-600">{{a.nombreUsuario.charAt(0).toUpperCase()}}</h1></div>
       <div class="space-y-2">
         <div class="text-lg font-bold text-white">
-          <h1>{{a.apellidoPaterno}}  {{a.apellidoMaterno}}  {{a.nombreUsuario}}</h1>
+          <h1>{{a.apellidoPaterno}} {{a.apellidoMaterno}} {{a.nombreUsuario}}</h1>
         </div>
         <span class="bg-blue-300 w-auto p-1 m-2 font-extrabold rounded-full text-center">100%</span>
         <progress min="0" max="100" value="100" class="w-full h-5 rounded-full overflow-hidden appearance-none 
@@ -18,27 +18,33 @@
         <div class="space-x-2 space-y-1 flex items-center justify-between">
           <button class="bg-green-500 p-2 font-bold text-white rounded-[10px] cursor-pointer"
             (click)="modalImagenAdd.showModal()">AGREGAR</button>
+        </div>
+      </div>
+    </div>
+    <!-- Sección derecha: avances -->
+    <div class="w-4/6 h-50 pl-2 flex gap-2 overflow-x-auto overflow-y-hidden"
+      style="background-color: #e6f0fa; scrollbar-width: thin;">
+      <div class="w-80 h-full bg-white shrink-0  relative overflow-hidden" *ngFor="let b of a.imagenes">
+        <div class="absolute top-2 left-2 z-10 flex gap-2">
           <button class="bg-red-500 p-2 font-bold text-white rounded-[10px] cursor-pointer"
             (click)="modalImagenDel.showModal()">ELIMINAR</button>
           <button class="bg-yellow-500 p-2 font-bold text-white rounded-[10px] cursor-pointer"
             (click)="modalImagenUp.showModal()">EDITAR</button>
         </div>
-      </div>
-    </div>
-    <!-- Sección derecha: avances -->
-    <div class="w-4/6 h-50 pl-2 flex gap-2 overflow-x-auto overflow-y-hidden" style="background-color: #e6f0fa; scrollbar-width: thin;">
-      <div class="w-80 h-full bg-white shrink-0 flex items-start relative" *ngFor="let b of a.imagenes">
-        <div class="w-auto p-2 m-2 rounded-full absolute text-white font-bold" style="background-color: #004080;">
+        <div class="w-auto p-2 m-2 rounded-full absolute top-2 right-2 z-10 px-3 py-1 text-white font-bold"
+          style="background-color: #004080;">
           <h1>{{b.fechaSubido | date:'dd/MM/yyyy'}}</h1>
         </div>
-        <img [src]="'http://localhost:8080' + b.rutaImagen"  class="h-50 w-80">
+        <img [src]="'http://localhost:8080' + b.rutaImagen" class="h-50 w-80">
       </div>
     </div>
     <!-- modal.component.html -->
-    <dialog #modalImagenAdd class="rounded-lg p-6 bg-white shadow-lg">
-      <h2 class="text-xl font-bold mb-4">Título del modal</h2>
+    <dialog #modalImagenAdd class="rounded-lg p-6 bg-white shadow-lg gap-2">
+      <h2 class="text-xl font-bold mb-4">Agregar Imagen</h2>
+      <input type="file" [(ngModel)]="rutaImagen">
       <p>Agregar Imagen.</p>
-      <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" (click)="modalImagenAdd.close()">Cerrar</button>
+      <button class="mt-4 bg-red-600 text-white px-4 py-2 rounded m-2" (click)="modalImagenAdd.close()">Cerrar</button>
+      <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" (click)="AgregarImg(a.idUsuario)">Agregar</button>
     </dialog>
     <dialog #modalImagenDel class="rounded-lg p-6 bg-white shadow-lg">
       <h2 class="text-xl font-bold mb-4">Título del modal</h2>

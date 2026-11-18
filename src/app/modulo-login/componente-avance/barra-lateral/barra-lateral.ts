@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario } from '../../../models/usuario.model';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   imports: [CommonModule],
@@ -9,10 +11,17 @@ import { Router } from '@angular/router';
   templateUrl: './barra-lateral.html',
 })
 export class BarraLateral implements OnInit {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private usuarioService: UserService) { }
   Avances: string[] = ['VER IMAGEN', 'VER USUARIOS', 'ELIMINAR IMAGEN', 'EDITAR IMAGEN', 'CERRAR SESION']
+  usuarios: Usuario[] =[]
 
-  seleccionado: string | null = 'VER IMAGEN'
+  seleccionado: string | null = 'VER IMAGEN';
+
+  nombre = localStorage.getItem('nombre');
+  apellido = localStorage.getItem('apellido')
+  rol = localStorage.getItem('rol')
+  correo = localStorage.getItem('correo')
+
 
   ngOnInit(): void {
     this.router.navigate(['/avanceImagenes/verImagenes']);

@@ -18,11 +18,11 @@ export class ModuloLogin implements OnInit, OnDestroy {
 
   mensaje: string = "";
   tipomensaje: string = "";
+  rol: string = "";
 
-  logins: Login[] = [];
 
-  constructor(private UsuarioService: UserService, private router: Router, 
-      private cdr : ChangeDetectorRef
+  constructor(private UsuarioService: UserService, private router: Router,
+    private cdr: ChangeDetectorRef
   ) { }
 
   funcionlogin(): void {
@@ -31,20 +31,32 @@ export class ModuloLogin implements OnInit, OnDestroy {
         this.nombreLogin,
         this.contrasena)
       .subscribe({
-        next: (respuesta) => {
+        next: (respuesta: any) => {
+          console.log(respuesta)
           this.mensaje = respuesta.mensaje;
+          this.rol = respuesta.rol
           this.tipomensaje =
-          respuesta.mensaje === "Usuario logueado"
-          ? "exito"
-          : "error"
+            respuesta.mensaje === "Usuario logueado"
+              ? "exito"
+              : "error"
+
           this.cdr.detectChanges();
 
-          if(this.mensaje === "Usuario logueado"){
+          if (this.mensaje === "Usuario logueado") {
             localStorage.setItem(
               'autenticado',
               'true'
-            )
-            this.router.navigate(['/avanceImagenes/verImagenes'])
+            );
+            localStorage.setItem('nombre', respuesta.nombre)
+            localStorage.setItem('apellido', respuesta.apellido)
+            localStorage.setItem('rol', respuesta.rol)
+            localStorage.setItem('correo', respuesta.email)
+            if (this.rol === 'admin') {
+              this.router.navigate(['/avanceImagenes/verImagenes'])
+            } else if (this.rol === 'usuario') {
+              console.log('Vista usuarios')
+            }
+
           }
         },
 
@@ -65,5 +77,6 @@ export class ModuloLogin implements OnInit, OnDestroy {
     this.contrasena = '';
     this.mensaje = '';
     this.tipomensaje = '';
+    this.rol = '';
   }
 }
