@@ -1,8 +1,24 @@
+export interface Imagen {
+  idImagenes: number;
+  rutaImagen: string;
+  descripcionAvance: string;
+  fechaSubido: Date;
+}
+
+
 export interface Usuario {
-  idusuario: number;
-  nombrelogin?: string;
-  nombreusuario?: string;
-  apellidosusuario?: string;
-  contrasena?: string;
-  rol?: string;
+  idUsuario: number;
+  nombreUsuario: string;
+  apellidoPaterno: string;
+  apellidoMaterno: string;
+  dniUsuario: number;
+  rolUsuario: string;
+  imagenes: Imagen[];
+}
+
+export interface Login {
+  idLogin: number;
+  correoLogin: string;
+  contrasenaLogin: string;
+  usuario: Usuario;
 }

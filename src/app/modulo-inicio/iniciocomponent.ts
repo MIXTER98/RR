@@ -6,6 +6,7 @@ import {DicenComponent} from './loquedicen/dicen.component';
 import {NosotrosComponent} from './nosotros/nosotros.component';
 import {ProyectoComponent} from './proyectos/proyecto.component';
 import {ServiciosComponent} from './servicios/servicios.component';
+import { Prueba } from '../prueba/prueba';
 
 @Component({
   selector: 'app-inicio',
@@ -14,6 +15,6 @@ import {ServiciosComponent} from './servicios/servicios.component';
   styleUrls: ['./inicio.component.css'],
   imports: [CarruselComponent, ContactanosComponent,
     HeroSectionComponent, DicenComponent, NosotrosComponent,
-    ProyectoComponent, ServiciosComponent]
+    ProyectoComponent, ServiciosComponent, Prueba]
 })
 export class InicioComponent {}

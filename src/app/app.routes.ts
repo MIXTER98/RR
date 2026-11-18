@@ -9,6 +9,7 @@ import {ModuloLogin} from './modulo-login/modulo-login';
 import { ComponenteAvance } from './modulo-login/componente-avance/componente-avance';
 import { MostrarImagenes } from './modulo-login/componente-avance/mostrar-imagenes/mostrar-imagenes';
 import {AgregarImagenes} from './modulo-login/componente-avance/agregar-imagenes/agregar-imagenes';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
   { path: '', component: InicioComponent, },
@@ -17,7 +18,7 @@ export const routes: Routes = [
   {path:'proyectos', component: NuestrosproyectosComponent},
   {path:'contacto', component: ContactanosComponent},
   {path:'login', component: ModuloLogin},
-  {path:'dashboard', component: ComponenteAvance,
+  {path:'avanceImagenes', component: ComponenteAvance, canActivate:[authGuard],
     children:[
       {path:'verImagenes', component: MostrarImagenes},
       {path:'agregarImagenes', component: AgregarImagenes},

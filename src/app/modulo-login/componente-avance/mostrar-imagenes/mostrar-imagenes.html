@@ -1,19 +1,20 @@
 <div class="w-full h-auto p-2 space-y-2" style="background-color: transparent;">
-  <div class="w-full h-50 bg-white flex border-2 border-[#004080] rounded-[10px]" *ngFor="let a of Usuarios">
+  <div class="w-full h-50 bg-white flex border-2 border-[#004080] rounded-[10px]" *ngFor="let a of usuarios()">
 
     <!-- Sección izquierda: info del usuario -->
-    <div class="w-2/6 h-50 flex items-center space-x-4 p-2" style="background-color: #004080;">
-      <div class="h-40 w-40 rounded-full bg-white shadow shadow-amber-100"></div>
+    <div class="w-3/6 h-50 flex items-center space-x-4 p-2" style="background-color: #004080;">
+      <div class="h-10 w-10 rounded-full bg-white shadow shadow-amber-100"></div>
       <div class="space-y-2">
         <div class="text-lg font-bold text-white">
-          {{a.usuarios.nombreusuario}} {{a.usuarios.apellidosusuario}}
+          <h1>{{a.apellidoPaterno}}  {{a.apellidoMaterno}}  {{a.nombreUsuario}}</h1>
         </div>
-        <span class="bg-blue-300 w-auto p-1 m-2 font-extrabold rounded-full text-center">{{a.totalporcentaje}}%</span>
-        <progress min="0" max="100" value="{{a.totalporcentaje}}" class="w-full h-5 rounded-full overflow-hidden appearance-none 
+        <span class="bg-blue-300 w-auto p-1 m-2 font-extrabold rounded-full text-center">100%</span>
+        <progress min="0" max="100" value="100" class="w-full h-5 rounded-full overflow-hidden appearance-none 
          [&::-webkit-progress-bar]:bg-gray-200 
          [&::-webkit-progress-value]:bg-[#26d408] 
          [&::-moz-progress-bar]:bg-[#06c636]">
         </progress>
+
         <div class="space-x-2 space-y-1 flex items-center justify-between">
           <button class="bg-green-500 p-2 font-bold text-white rounded-[10px] cursor-pointer"
             (click)="modalImagenAdd.showModal()">AGREGAR</button>
@@ -25,12 +26,12 @@
       </div>
     </div>
     <!-- Sección derecha: avances -->
-    <div class="w-4/6 h-50 pl-2 flex gap-2" style="background-color: #e6f0fa;">
-      <div class="w-80 h-full bg-white flex items-start relative" *ngFor="let b of a.avances">
+    <div class="w-4/6 h-50 pl-2 flex gap-2 overflow-x-auto overflow-y-hidden" style="background-color: #e6f0fa; scrollbar-width: thin;">
+      <div class="w-80 h-full bg-white shrink-0 flex items-start relative" *ngFor="let b of a.imagenes">
         <div class="w-auto p-2 m-2 rounded-full absolute text-white font-bold" style="background-color: #004080;">
-          {{b.fecha}}
+          <h1>{{b.fechaSubido | date:'dd/MM/yyyy'}}</h1>
         </div>
-        <img [src]="b.rutaImagen" class="h-50 w-80">
+        <img [src]="'http://localhost:8080' + b.rutaImagen"  class="h-50 w-80">
       </div>
     </div>
     <!-- modal.component.html -->
@@ -41,7 +42,7 @@
     </dialog>
     <dialog #modalImagenDel class="rounded-lg p-6 bg-white shadow-lg">
       <h2 class="text-xl font-bold mb-4">Título del modal</h2>
-      <p>Eliminar Imagen. {{a.idusuario.idUsuario}}</p>
+      <p>Eliminar Imagen. </p>
       <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" (click)="modalImagenDel.close()">Cerrar</button>
       <button class="mt-4 bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
     </dialog>
@@ -52,3 +53,5 @@
     </dialog>
   </div>
 </div>
+
+<h1>TOTAL USUARIOS: {{usuarios().length}}</h1>

@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,19 +8,31 @@ import { Router } from '@angular/router';
   styleUrl: './barra-lateral.css',
   templateUrl: './barra-lateral.html',
 })
-export class BarraLateral {
-constructor(private router: Router){}
-  Avances: string[] = ['VER IMAGEN','VER USUARIOS', 'ELIMINAR IMAGEN', 'EDITAR IMAGEN']
+export class BarraLateral implements OnInit {
+  constructor(private router: Router) { }
+  Avances: string[] = ['VER IMAGEN', 'VER USUARIOS', 'ELIMINAR IMAGEN', 'EDITAR IMAGEN', 'CERRAR SESION']
 
   seleccionado: string | null = 'VER IMAGEN'
-  seleccionar(b: string){
-      this.seleccionado = b;
-      if(this.seleccionado === 'VER IMAGEN'){
-          this.router.navigate(['/dashboard/verImagenes'])
-      }else if(this.seleccionado === 'VER USUARIOS'){
-        this.router.navigate(['/dashboard/agregarImagenes'])
-        console.log("CAMBIO")
-      }
+
+  ngOnInit(): void {
+    this.router.navigate(['/avanceImagenes/verImagenes']);
+  }
+  seleccionar(b: string) {
+    this.seleccionado = b;
+    if (this.seleccionado === 'VER IMAGEN') {
+      this.router.navigate(['/avanceImagenes/verImagenes'])
+    } else if (this.seleccionado === 'VER USUARIOS') {
+      this.router.navigate(['/avanceImagenes/agregarImagenes'])
+    } else if (this.seleccionado === 'CERRAR SESION') {
+      this.cerrarSesion()
+    }
+  }
+
+  cerrarSesion(): void {
+    localStorage.removeItem('autenticado');
+    localStorage.clear();
+    sessionStorage.clear();
+    this.router.navigate(['/login'])
   }
 
 }

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
-import {UsuarioService} from '../services/usuario.service';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Login } from '../models/usuario.model';
+import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,36 +11,59 @@ import { Router } from '@angular/router';
   styleUrl: './modulo-login.css',
   templateUrl: './modulo-login.html',
 })
-export class ModuloLogin {
-  nombreLogin: string = '';
-  constrasena: string = '';
-  mensaje: string = '';
-  rol: string = '';
-  tipoMensaje: 'exito' | 'error'|''='';
+export class ModuloLogin implements OnInit, OnDestroy {
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {}
-  login(): void {
-    if(!this.nombreLogin || !this.constrasena){
-      this.mensaje = 'Por favor, complete todos los campos!';
-      this.tipoMensaje = 'error';
-    return;
+  nombreLogin: string = "";
+  contrasena: string = "";
+
+  mensaje: string = "";
+  tipomensaje: string = "";
+
+  logins: Login[] = [];
+
+  constructor(private UsuarioService: UserService, private router: Router, 
+      private cdr : ChangeDetectorRef
+  ) { }
+
+  funcionlogin(): void {
+    this.UsuarioService
+      .setAutenticar(
+        this.nombreLogin,
+        this.contrasena)
+      .subscribe({
+        next: (respuesta) => {
+          this.mensaje = respuesta.mensaje;
+          this.tipomensaje =
+          respuesta.mensaje === "Usuario logueado"
+          ? "exito"
+          : "error"
+          this.cdr.detectChanges();
+
+          if(this.mensaje === "Usuario logueado"){
+            localStorage.setItem(
+              'autenticado',
+              'true'
+            )
+            this.router.navigate(['/avanceImagenes/verImagenes'])
+          }
+        },
+
+
+        error: (error) => {
+          console.log(error)
+        },
+        complete: () => { console.log("Acción culminada") }
+      })
+
   }
-    const autencado = this.usuarioService.autenticarUsuario(
-      this.nombreLogin,
-      this.constrasena,
-      this.rol,
-    );
 
-    if(autencado){
-    this.mensaje ='Login corecto, !Bienvenido';
-    this.tipoMensaje ='exito';
-    //Redirige a otra ruta
-      this.router.navigate(['/dashboard']);
-    } else{
-    this.mensaje ='Usuario o contraseña incorrecto';
-    this.tipoMensaje ='error';
-    }
+  ngOnInit(): void {
+
   }
-
-
+  ngOnDestroy(): void {
+    this.nombreLogin = '';
+    this.contrasena = '';
+    this.mensaje = '';
+    this.tipomensaje = '';
+  }
 }
